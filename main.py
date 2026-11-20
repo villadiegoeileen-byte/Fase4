@@ -12,13 +12,12 @@ import logging
 
 from excepciones import SistemaError
 from entidades import Cliente
-
 from servicio import (
     ReservaSalas,
     AlquilerEquipos,
     AsesoriasEspecializadas
 )
-
+from reserva import Reserva
 
 
 def ejecutar_simulacion():
@@ -43,15 +42,19 @@ def ejecutar_simulacion():
                 f" ❌ Excepción Controlada "
                 f"[{type(e).__name__}]: {e}"
             )
-            logging.error(f"Operación {num} fallida: {e}")
+            logging.error(
+                f"Operación {num} fallida: {e}"
+            )
 
         except Exception as e:
             print(f" 💥 Error Inesperado: {e}")
-            logging.critical(f"Error crítico en Op {num}: {e}")
+            logging.critical(
+                f"Error crítico en Op {num}: {e}"
+            )
 
         print()
 
-    # 1. Cliente válido
+    # 1. Registro de cliente válido
     def op1():
 
         c1 = Cliente(
@@ -65,9 +68,13 @@ def ejecutar_simulacion():
 
         print(f" ✅ Registrado: {c1}")
 
-    operacion(1, "Registro de cliente válido", op1)
+    operacion(
+        1,
+        "Registro de cliente válido",
+        op1
+    )
 
-    # 2. Correo inválido
+    # 2. Registro de cliente con correo inválido
     def op2():
 
         c2 = Cliente(
@@ -79,9 +86,13 @@ def ejecutar_simulacion():
 
         clientes.append(c2)
 
-    operacion(2, "Registro de cliente con correo inválido", op2)
+    operacion(
+        2,
+        "Registro de cliente con correo inválido",
+        op2
+    )
 
-    # 3. Teléfono corto
+    # 3. Registro de cliente con teléfono insuficiente
     def op3():
 
         c3 = Cliente(
@@ -93,9 +104,13 @@ def ejecutar_simulacion():
 
         clientes.append(c3)
 
-    operacion(3, "Registro de cliente con teléfono insuficiente", op3)
+    operacion(
+        3,
+        "Registro de cliente con teléfono insuficiente",
+        op3
+    )
 
-    # 4. Servicio Sala
+    # 4. Creación de servicio de sala
     def op4():
 
         s1 = ReservaSalas(
@@ -107,11 +122,17 @@ def ejecutar_simulacion():
 
         servicios.append(s1)
 
-        print(f" ✅ Creado: {s1.descripcion_servicio()}")
+        print(
+            f" ✅ Creado: {s1.descripcion_servicio()}"
+        )
 
-    operacion(4, "Creación de Servicio de Sala", op4)
+    operacion(
+        4,
+        "Creación de Servicio de Sala",
+        op4
+    )
 
-    # 5. Tarifa negativa
+    # 5. Servicio con tarifa negativa
     def op5():
 
         s2 = AlquilerEquipos(
@@ -123,9 +144,13 @@ def ejecutar_simulacion():
 
         servicios.append(s2)
 
-    operacion(5, "Servicio con tarifa negativa", op5)
+    operacion(
+        5,
+        "Servicio con tarifa negativa",
+        op5
+    )
 
-    # 6. Varios Servicios Válidos
+    # 6. Creación de varios servicios válidos
     def op6():
 
         s3 = AlquilerEquipos(
@@ -149,9 +174,13 @@ def ejecutar_simulacion():
             f"Total activos: {len(servicios)}"
         )
 
-    operacion(6, "Creación de servicios válidos", op6)
+    operacion(
+        6,
+        "Creación de servicios válidos",
+        op6
+    )
 
-    # 7. Reserva y Confirmación Exitosa
+    # 7. Reserva y confirmación exitosa
     def op7():
 
         r1 = Reserva(
@@ -169,11 +198,17 @@ def ejecutar_simulacion():
         reservas.append(r1)
 
         print(f" ✅ {r1}")
-        print(f" 💰 Monto total procesado: ${total}")
+        print(
+            f" 💰 Monto total procesado: ${total}"
+        )
 
-    operacion(7, "Reserva y confirmación válida", op7)
+    operacion(
+        7,
+        "Reserva y confirmación válida",
+        op7
+    )
 
-    # 8. Servicio Inactivo
+    # 8. Intento de reserva sobre servicio inactivo
     def op8():
 
         servicios[0].cambiar_disponibilidad(False)
@@ -187,16 +222,24 @@ def ejecutar_simulacion():
 
         reservas.append(r2)
 
-    operacion(8, "Reserva sobre servicio inactivo", op8)
+    operacion(
+        8,
+        "Reserva sobre servicio inactivo",
+        op8
+    )
 
-    # 9. Re-confirmar Reserva
+    # 9. Intento de reconfirmar una reserva
     def op9():
 
         reservas[0].confirmar()
 
-    operacion(9, "Re-confirmación de reserva activa", op9)
+    operacion(
+        9,
+        "Re-confirmación de reserva activa",
+        op9
+    )
 
-    # 10. Doble Cancelación
+    # 10. Intento de doble cancelación
     def op10():
 
         servicios[0].cambiar_disponibilidad(True)
@@ -219,7 +262,11 @@ def ejecutar_simulacion():
 
         r3.cancelar()
 
-    operacion(10, "Doble cancelación de reserva", op10)
+    operacion(
+        10,
+        "Doble cancelación de reserva",
+        op10
+    )
 
     print("=" * 70)
     print(" SIMULACIÓN CONCLUIDA SIN DETENER EL SISTEMA")
@@ -229,4 +276,5 @@ def ejecutar_simulacion():
 
 if __name__ == "__main__":
     ejecutar_simulacion()
+
 
