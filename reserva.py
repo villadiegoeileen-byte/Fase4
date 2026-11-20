@@ -2,7 +2,7 @@
 import logging
 
 from entidades import Entidad, Cliente
-from servicios import Servicio
+from servicio import Servicio
 from excepciones import (
     ValidacionError,
     ReservaError,
@@ -107,3 +107,4 @@ class Reserva(Entidad):
             f"Estado: {self.__estado}"
         )
       
+
