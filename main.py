@@ -12,12 +12,13 @@ import logging
 
 from excepciones import SistemaError
 from entidades import Cliente
-from servicios import (
+
+from servicio import (
     ReservaSalas,
     AlquilerEquipos,
     AsesoriasEspecializadas
 )
-from reservas import Reserva
+
 
 
 def ejecutar_simulacion():
@@ -228,3 +229,4 @@ def ejecutar_simulacion():
 
 if __name__ == "__main__":
     ejecutar_simulacion()
+
