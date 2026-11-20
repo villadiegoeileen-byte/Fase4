@@ -12,7 +12,13 @@ from excepciones import (
 
 class Reserva(Entidad):
 
-    def __init__(self, id_reserva, cliente: Cliente, servicio: Servicio, duracion: int):
+    def __init__(
+        self,
+        id_reserva,
+        cliente: Cliente,
+        servicio: Servicio,
+        duracion: int
+    ):
         self.__id_reserva = id_reserva
         self.__cliente = cliente
         self.__servicio = servicio
@@ -43,7 +49,10 @@ class Reserva(Entidad):
                 "Requiere un objeto Servicio válido."
             )
 
-        if not isinstance(self.__duracion, int) or self.__duracion <= 0:
+        if (
+            not isinstance(self.__duracion, int)
+            or self.__duracion <= 0
+        ):
             raise ValidacionError(
                 "La duración debe ser un entero positivo."
             )
@@ -58,7 +67,8 @@ class Reserva(Entidad):
 
         if self.__estado == "Confirmada":
             raise ReservaError(
-                f"La reserva ID {self.__id_reserva} ya está confirmada."
+                f"La reserva ID {self.__id_reserva} "
+                "ya está confirmada."
             )
 
         if self.__estado == "Cancelada":
@@ -86,7 +96,8 @@ class Reserva(Entidad):
 
         if self.__estado == "Cancelada":
             raise ReservaError(
-                f"La reserva ID {self.__id_reserva} ya estaba cancelada."
+                f"La reserva ID {self.__id_reserva} "
+                "ya estaba cancelada."
             )
 
         self.__estado = "Cancelada"
@@ -106,5 +117,3 @@ class Reserva(Entidad):
             f"{self.__servicio.descripcion_servicio()} | "
             f"Estado: {self.__estado}"
         )
-      
-
